@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+<form align="center">
+	<input type="number" id="inputSo" onkeypress="return searchKeyPress(event);">  
+    <button type="button" id="checkButton" onclick="checkSo();">Check</button>
+</form>
+<hr/>
+<div id="test" align="center"></div>
+<div id="checkChanLe" align="center"></div>
+<div id="checkSoNguyenTo" align="center"></div>
+<div id="inDaySo" align="center"></div>
+<div id="soLanNhap" align="center"></div>
+<script type="text/javascript">
+    var soLanNhap = 1;
+	function checkSo() {
+        let so = parseInt(document.getElementById('inputSo').value);
+        document.getElementById('test').innerHTML = 'Test input: ' + so;
+        document.getElementById('soLanNhap').innerHTML = 'Số lần nhập là: ' + soLanNhap ;
+        checkChanLe(so);
+        checkSoNguyenTo(so);
+        inDaySo(so);
+        soLanNhap++;
+    }
+
+    function searchKeyPress(event) {
+    if (event.keyCode === 13) {
+        /*event.preventDefault();*/
+        document.getElementById("checkButton").click();
+        return false;
+    }
+    return true;
+    
+    }
+    
+    function checkChanLe(p1){
+        if(p1 % 2 == 0){
+            document.getElementById('checkChanLe').innerHTML = p1 + ' là số chẵn';
+        } else {
+            document.getElementById('checkChanLe').innerHTML = p1 + ' là số lẻ';
+        }
+    }
+
+    function checkSoNguyenTo(p1){
+        if(p1 <= 1){
+            document.getElementById('checkSoNguyenTo').innerHTML = p1 + ' không phải số nguyên tố';
+        } else{
+            if (p1 != 2 && p1 % 2 == 0) {
+                document.getElementById('checkSoNguyenTo').innerHTML = p1 + ' không phải số nguyên tố';
+            }else{
+                for(var i = 1; i <= Math.sqrt(p1); i++) {
+                if(p1 % i == 0){
+                    document.getElementById('checkSoNguyenTo').innerHTML = p1 + ' không phải số nguyên tố';
+                }
+                else{
+                    document.getElementById('checkSoNguyenTo').innerHTML = p1 + ' là số nguyên tố';
+                }
+            }
+            }
+        }
+    }
+
+    function inDaySo(p1){
+        var daySo = [];
+        for(var i=1; i <= p1; i++) {
+            daySo.push(i);
+        }
+        document.getElementById('inDaySo').innerHTML = 'Dãy số: ' + daySo;
+    }
+</script>
+</body>
+</html>
